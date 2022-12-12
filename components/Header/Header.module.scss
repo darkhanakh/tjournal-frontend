@@ -1,0 +1,52 @@
+$primary-color: #fff4e2;
+
+.root {
+  background-color: $primary-color !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 60px;
+}
+
+.logo {
+  margin-right: 25px;
+  margin-left: 10px;
+}
+
+.searchBlock {
+  position: relative;
+  margin-right: 15px;
+  svg {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    opacity: 0.3;
+  }
+
+  input {
+    font-size: 16px;
+    width: 240px;
+    height: 38px;
+    border: 0;
+    border-radius: 10px;
+    background-color: rgba($color: #000000, $alpha: 0.05);
+    padding-left: 40px;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      background-color: #fff;
+      border-color: darken($color: $primary-color, $amount: 15%);
+      box-shadow: 0 0 0 3px rgb(229 160 64 / 12%);
+    }
+  }
+}
+
+.penButton {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+}
