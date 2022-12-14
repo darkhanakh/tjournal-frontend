@@ -1,6 +1,8 @@
-import Head from "next/head";
+import Head from 'next/head';
 
-import Header from "../components/Header";
+import Header from '../components/Header';
+import LeftMenu from '../components/LeftMenu';
+import Post from '../components/Post';
 
 export default function Home() {
   return (
@@ -22,6 +24,24 @@ export default function Home() {
       </Head>
 
       <Header />
+
+      <div className="wrapper">
+        <div className="leftSide">
+          <LeftMenu />
+        </div>
+        <div className="content">
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+        </div>
+        <div className="rigthSide"></div>
+      </div>
     </div>
   );
 }
+
+/* 1:27:15 */

@@ -5,6 +5,7 @@ import CreateIcon from '@material-ui/icons/CreateOutlined';
 import MessageIcon from '@material-ui/icons/SmsOutlined';
 import NotificationIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import MenuIcon from '@material-ui/icons/Menu';
+import ArrowBottomIcon from '@material-ui/icons/ExpandMoreOutlined';
 
 import styles from './Header.module.scss';
 const Header: React.FC = () => {
@@ -26,7 +27,7 @@ const Header: React.FC = () => {
           <input type="text" placeholder="Поиск" />
         </div>
         <Button variant="contained" className={styles.penButton}>
-          <CreateIcon />
+          Новая запись
         </Button>
       </div>
       <div className="d-flex align-center">
@@ -36,7 +37,12 @@ const Header: React.FC = () => {
         <IconButton>
           <NotificationIcon />
         </IconButton>
-        <Avatar className="ml-15" alt="avatar" src="/static/img/avatar.jpg" />
+        <Avatar
+          className={styles.avatar}
+          alt="avatar"
+          src="/static/img/avatar.jpg"
+        />
+        <ArrowBottomIcon />
       </div>
     </Paper>
   );
