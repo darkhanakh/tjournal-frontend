@@ -2,8 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Roboto', sans-serif;
   background-color: rgb(242, 242, 242);
+  font-family: Roboto, 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 a {
@@ -12,7 +12,10 @@ a {
 }
 
 * {
+  -webkit-text-size-adjust: 100%;
   box-sizing: border-box;
+  outline: none;
+  font-family: Roboto, 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 .content {
@@ -22,5 +25,7 @@ a {
 }
 
 .wrapper {
-  padding-top: 75px;
+  display: flex;
+  padding: 0 30px;
+  padding-top: 80px;
 }

@@ -1,31 +1,34 @@
-import Image from 'next/image';
+import React from 'react';
 import { Paper, Button, IconButton, Avatar } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import CreateIcon from '@material-ui/icons/CreateOutlined';
-import MessageIcon from '@material-ui/icons/SmsOutlined';
-import NotificationIcon from '@material-ui/icons/NotificationsNoneOutlined';
-import MenuIcon from '@material-ui/icons/Menu';
-import ArrowBottomIcon from '@material-ui/icons/ExpandMoreOutlined';
+import {
+  SearchOutlined as SearchIcon,
+  CreateOutlined as PenIcon,
+  SmsOutlined as MessageIcon,
+  Menu as MenuIcon,
+  ExpandMoreOutlined as ArrowBottom,
+  NotificationsNoneOutlined as NotificationIcon,
+} from '@material-ui/icons';
 
 import styles from './Header.module.scss';
-const Header: React.FC = () => {
+
+export const Header: React.FC = () => {
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>
-      <div className="d-flex align-center ">
+      <div className="d-flex align-center">
         <IconButton>
           <MenuIcon />
         </IconButton>
-        <Image
-          src="/static/img/logo.svg"
-          alt="logo"
-          width={35}
-          height={45}
-          className={styles.logo}
-        />
+        <svg className={styles.logo} viewBox="0 0 24 25">
+          <path fill="#e8a427" d="M0 19h8.5v6H0v-6z"></path>
+          <path d="M0 7h8.5v18l6.5-6V7h9V0H0v7z"></path>
+          <path fill="rgba(0,0,0,0.15)" d="M7.5 19h1v6l-1-6z"></path>
+        </svg>
+
         <div className={styles.searchBlock}>
           <SearchIcon />
-          <input type="text" placeholder="Поиск" />
+          <input placeholder="Поиск" />
         </div>
+
         <Button variant="contained" className={styles.penButton}>
           Новая запись
         </Button>
@@ -39,13 +42,11 @@ const Header: React.FC = () => {
         </IconButton>
         <Avatar
           className={styles.avatar}
-          alt="avatar"
-          src="/static/img/avatar.jpg"
+          alt="Remy Sharp"
+          src="https://leonardo.osnova.io/5ffeac9a-a0e5-5be6-98af-659bfaabd2a6/-/scale_crop/108x108/-/format/webp/"
         />
-        <ArrowBottomIcon />
+        <ArrowBottom />
       </div>
     </Paper>
   );
 };
-
-export default Header;
