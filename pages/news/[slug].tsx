@@ -1,6 +1,5 @@
 import { MainLayout } from '../../layouts/MainLayout';
-import { FullPost } from '../../components/FullPost';
-import { Comment } from '../../components/Comment';
+import { Comment, FullPost } from '../../components/';
 import { Divider, Paper, Tab, Tabs, Typography } from '@material-ui/core';
 import React from 'react';
 

@@ -1,4 +1,4 @@
-import { Post } from '../components/Post';
+import { Post } from '../components';
 import { MainLayout } from '../layouts/MainLayout';
 
 export default function Home() {

@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 
 import { MainLayout } from '../layouts/MainLayout';
-import { FollowButton } from '../components/FollowButton';
+import { FollowButton } from '../components';
 
 export default function Rating() {
   return (

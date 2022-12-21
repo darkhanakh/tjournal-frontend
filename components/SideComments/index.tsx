@@ -60,7 +60,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ user, text, post }) => {
   );
 };
 
-export const SideComments = () => {
+const SideComments = () => {
   return (
     <div className={styles.root}>
       <h3>
@@ -72,3 +72,5 @@ export const SideComments = () => {
     </div>
   );
 };
+
+export default SideComments;

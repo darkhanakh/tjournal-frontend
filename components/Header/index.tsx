@@ -13,7 +13,7 @@ import Image from 'next/image';
 
 import styles from './Header.module.scss';
 
-export const Header: React.FC = () => {
+const Header: React.FC = () => {
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>
       <div className="d-flex align-center">
@@ -23,8 +23,8 @@ export const Header: React.FC = () => {
         <Link href="/" legacyBehavior>
           <a>
             <Image
-              width={35}
-              height={35}
+              width={45}
+              height={40}
               className="mr-20"
               src="/static/img/logo.svg"
               alt="Logo"
@@ -62,3 +62,5 @@ export const Header: React.FC = () => {
     </Paper>
   );
 };
+
+export default Header;

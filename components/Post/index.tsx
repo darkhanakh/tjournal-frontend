@@ -6,7 +6,7 @@ import Image from 'next/image';
 import styles from './Post.module.scss';
 import { PostActions } from '../PostActions';
 
-export const Post: React.FC = () => {
+const Post: React.FC = () => {
   return (
     <Paper elevation={0} className="p-20" classes={{ root: styles.paper }}>
       <Typography variant="h5" className={styles.title}>
@@ -31,3 +31,5 @@ export const Post: React.FC = () => {
     </Paper>
   );
 };
+
+export default Post;

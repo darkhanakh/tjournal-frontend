@@ -11,7 +11,7 @@ interface CommentPostProps {
   text: string;
 }
 
-export const Comment: React.FC<CommentPostProps> = ({ user, text }) => {
+const Comment: React.FC<CommentPostProps> = ({ user, text }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -53,3 +53,5 @@ export const Comment: React.FC<CommentPostProps> = ({ user, text }) => {
     </div>
   );
 };
+
+export default Comment;

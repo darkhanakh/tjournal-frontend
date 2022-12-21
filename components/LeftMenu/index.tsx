@@ -17,7 +17,7 @@ const menu = [
   { text: 'Подписки', icon: <ListIcon />, path: '/follows' },
 ];
 
-export const LeftMenu: React.FC = () => {
+const LeftMenu: React.FC = () => {
   return (
     <div className={styles.menu}>
       <ul>
@@ -35,3 +35,5 @@ export const LeftMenu: React.FC = () => {
     </div>
   );
 };
+
+export default LeftMenu;
