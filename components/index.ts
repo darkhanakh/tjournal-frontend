@@ -6,3 +6,4 @@ export { default as Header } from './Header';
 export { default as LeftMenu } from './LeftMenu';
 export { default as Post } from './Post';
 export { default as SideComments } from './SideComments';
+export { default as WriteForm } from './WriteForm';
