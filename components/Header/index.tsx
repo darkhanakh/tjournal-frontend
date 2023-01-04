@@ -1,19 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Paper, Button, IconButton, Avatar } from '@material-ui/core';
 import {
   SearchOutlined as SearchIcon,
-  CreateOutlined as PenIcon,
   SmsOutlined as MessageIcon,
   Menu as MenuIcon,
   ExpandMoreOutlined as ArrowBottom,
   NotificationsNoneOutlined as NotificationIcon,
+  AccountCircleOutlined as UserIcon,
 } from '@material-ui/icons';
+
 import Image from 'next/image';
 
 import styles from './Header.module.scss';
+import AuthDialog from '../AuthDialog';
 
 const Header: React.FC = () => {
+  const [authVisible, setAuthVisible] = useState(false);
+
+  const handleAuthOpen = () => {
+    setAuthVisible(true);
+  };
+
+  const handleAuthClose = () => {
+    setAuthVisible(false);
+  };
+
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>
       <div className="d-flex align-center">
@@ -42,13 +54,13 @@ const Header: React.FC = () => {
         </Link>
       </div>
       <div className="d-flex align-center">
-        <IconButton>
+        <IconButton onClick={handleAuthOpen}>
           <MessageIcon />
         </IconButton>
         <IconButton>
           <NotificationIcon />
         </IconButton>
-        <Link href="/profile/1">
+        {/*<Link href="/profile/1">
           <div className="d-flex align-center">
             <Avatar
               className={styles.avatar}
@@ -57,8 +69,13 @@ const Header: React.FC = () => {
             />
             <ArrowBottom />
           </div>
-        </Link>
+        </Link>*/}
+        <div className={styles.loginButton} onClick={handleAuthOpen}>
+          <UserIcon />
+          Войти
+        </div>
       </div>
+      <AuthDialog onClose={handleAuthClose} visible={authVisible} />
     </Paper>
   );
 };

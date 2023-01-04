@@ -9,6 +9,7 @@ import {
 } from '@material-ui/icons';
 
 import styles from './LeftMenu.module.scss';
+import { useRouter } from 'next/router';
 
 const menu = [
   { text: 'Лента', icon: <FireIcon />, path: '/' },
@@ -18,13 +19,17 @@ const menu = [
 ];
 
 const LeftMenu: React.FC = () => {
+  const router = useRouter();
+
   return (
     <div className={styles.menu}>
       <ul>
         {menu.map((obj) => (
           <li key={obj.path}>
             <Link href={obj.path}>
-              <Button>
+              <Button
+                variant={obj.path === router.asPath ? 'contained' : 'text'}
+              >
                 {obj.icon}
                 {obj.text}
               </Button>
