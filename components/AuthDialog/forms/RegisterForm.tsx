@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { setCookie } from 'nookies';
 import { Button } from '@material-ui/core';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,6 +8,9 @@ import {
   RegistrationFormSchema,
 } from '../../../utils/validationSchemas';
 import FormField from '../../FormField';
+import { UserApi } from '../../../utils/api';
+import { CreateUserDto, LoginDto } from '../../../utils/api/types';
+import Alert from '@material-ui/lab/Alert';
 
 interface RegisterFormProps {
   onOpenLogin: () => void;
@@ -23,24 +27,45 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onOpenLogin }) => {
     resolver: yupResolver(RegistrationFormSchema),
   });
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = form;
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (dto: CreateUserDto) => {
+    try {
+      const data = await UserApi.register(dto);
+      setCookie(null, 'rtoken', data.token, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: '/',
+      });
+      setErrorMessage('');
+    } catch (e) {
+      console.warn('Ошибка при создания аккаунта', e);
+      if (e.response) {
+        setErrorMessage(e.response.data.message);
+      }
+    }
+  };
 
   return (
     <div>
       <FormProvider {...form}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormField name="fullname" label="Имя пользователя" />
+          <FormField name="fullName" label="Имя пользователя" />
           <FormField name="email" label="Почта" />
           <FormField name="password" label="Пароль" />
+          {errorMessage && (
+            <Alert severity="error" className="mb-20">
+              {errorMessage}
+            </Alert>
+          )}
           <div className="d-flex align-center justify-between">
             <Button
-              disabled={!isValid}
+              disabled={!isValid || isSubmitting}
               type="submit"
               color="primary"
               variant="contained"
