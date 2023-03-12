@@ -11,6 +11,8 @@ import FormField from '../../FormField';
 import { UserApi } from '../../../utils/api';
 import { CreateUserDto, LoginDto } from '../../../utils/api/types';
 import Alert from '@material-ui/lab/Alert';
+import { setUserData } from '../../../redux/reducers/user.slice';
+import { useAppDispatch } from '../../../redux/hooks';
 
 interface RegisterFormProps {
   onOpenLogin: () => void;
@@ -22,6 +24,8 @@ interface LoginFormInputs {
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ onOpenLogin }) => {
+  const dispatch = useAppDispatch();
+
   const form = useForm<LoginFormInputs>({
     mode: 'onChange',
     resolver: yupResolver(RegistrationFormSchema),
@@ -43,6 +47,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onOpenLogin }) => {
         path: '/',
       });
       setErrorMessage('');
+      dispatch(setUserData(data));
     } catch (e) {
       console.warn('Ошибка при создания аккаунта', e);
       if (e.response) {

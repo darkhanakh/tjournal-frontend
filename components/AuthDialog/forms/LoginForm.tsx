@@ -8,6 +8,8 @@ import FormField from '../../FormField';
 import { LoginDto } from '../../../utils/api/types';
 import { UserApi } from '../../../utils/api';
 import { setCookie } from 'nookies';
+import { useAppDispatch } from '../../../redux/hooks';
+import { setUserData } from '../../../redux/reducers/user.slice';
 
 interface LoginFormProps {
   onOpenRegister: () => void;
@@ -19,6 +21,7 @@ interface LoginFormInputs {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onOpenRegister }) => {
+  const dispatch = useAppDispatch();
   const form = useForm<LoginFormInputs>({
     mode: 'onChange',
     resolver: yupResolver(LoginFormSchema),
@@ -40,6 +43,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onOpenRegister }) => {
         path: '/',
       });
       setErrorMessage('');
+      dispatch(setUserData(data));
     } catch (e) {
       console.warn('Ошибка в входе в аккаунт', e);
       if (e.response) {

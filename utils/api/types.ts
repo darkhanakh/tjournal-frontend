@@ -7,7 +7,7 @@ export type CreateUserDto = {
   fullName: string;
 } & LoginDto;
 
-export type ResponceUser = {
+export type ResponseUser = {
   createdAt: string;
   id: number;
   token: string;
