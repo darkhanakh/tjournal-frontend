@@ -1,11 +1,13 @@
-export type LoginDto = {
+import { OutputData } from '@editorjs/editorjs';
+
+export interface LoginDto {
   email: string;
   password: string;
-};
+}
 
-export type CreateUserDto = {
+export interface CreateUserDto extends LoginDto {
   fullName: string;
-} & LoginDto;
+}
 
 export type ResponseUser = {
   createdAt: string;
@@ -13,3 +15,20 @@ export type ResponseUser = {
   token: string;
   updatedAt: string;
 } & CreateUserDto;
+
+export interface CreatePostDto {
+  title: string;
+  body: OutputData['blocks'];
+}
+
+export interface PostItem {
+  title: string;
+  body: OutputData['blocks'];
+  description: string;
+  tags: string | null;
+  id: number;
+  views: number;
+  createdAt: string;
+  updatedAt: string;
+  user: ResponseUser;
+}

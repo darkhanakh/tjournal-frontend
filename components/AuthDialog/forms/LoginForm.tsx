@@ -6,10 +6,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginFormSchema } from '../../../utils/validationSchemas';
 import FormField from '../../FormField';
 import { LoginDto } from '../../../utils/api/types';
-import { UserApi } from '../../../utils/api';
+import { UserApi } from '../../../utils/api/user';
 import { setCookie } from 'nookies';
 import { useAppDispatch } from '../../../redux/hooks';
 import { setUserData } from '../../../redux/reducers/user.slice';
+import { Api } from '../../../utils/api';
 
 interface LoginFormProps {
   onOpenRegister: () => void;
@@ -37,7 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onOpenRegister }) => {
 
   const onSubmit = async (dto: LoginDto) => {
     try {
-      const data = await UserApi.login(dto);
+      const data = await Api().user.login(dto);
       setCookie(null, 'rtoken', data.token, {
         maxAge: 30 * 24 * 60 * 60,
         path: '/',

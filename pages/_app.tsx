@@ -4,11 +4,12 @@ import 'macro-css';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
-import { Provider } from 'react-redux';
 
 import Header from '../components/Header';
 import { store, wrapper } from '../redux/store';
 import { theme } from '../theme';
+import { Api } from '../utils/api';
+import { setUserData } from '../redux/reducers/user.slice';
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -35,5 +36,31 @@ function App({ Component, pageProps }: AppProps) {
     </>
   );
 }
+
+App.getInitialProps = wrapper.getInitialAppProps(
+  (store) =>
+    async ({ ctx, Component }) => {
+      try {
+        const userData = await Api(ctx).user.getMe();
+
+        store.dispatch(setUserData(userData));
+      } catch (e) {
+        if (ctx.asPath === '/write') {
+          ctx.res.writeHead(302, {
+            Location: '/403',
+          });
+
+          ctx.res.end();
+        }
+        console.log(e);
+      }
+
+      return {
+        pageProps: Component.getInitialProps
+          ? await Component.getInitialProps({ ...ctx, store })
+          : {},
+      };
+    }
+);
 
 export default wrapper.withRedux(App);

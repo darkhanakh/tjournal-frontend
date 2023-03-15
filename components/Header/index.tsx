@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Paper, Button, IconButton, Avatar } from '@material-ui/core';
 import {
@@ -28,6 +28,12 @@ const Header: React.FC = () => {
   const handleAuthClose = () => {
     setAuthVisible(false);
   };
+
+  useEffect(() => {
+    if (authVisible && userData) {
+      setAuthVisible(false);
+    }
+  }, [authVisible, userData]);
 
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>
