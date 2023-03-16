@@ -38,7 +38,7 @@ const AuthDialog: React.FC<AuthDialogProps> = ({ onClose, visible }) => {
             <div className={styles.content}>
               <Typography className={styles.title}>
                 {formType === 'main' ? (
-                  'Вход в TJ'
+                  'Вход в RJ'
                 ) : (
                   <p
                     onClick={() => setFormType('main')}

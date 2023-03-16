@@ -14,6 +14,7 @@ export type ResponseUser = {
   id: number;
   token: string;
   updatedAt: string;
+  commentsCount?: number;
 } & CreateUserDto;
 
 export interface CreatePostDto {
@@ -31,4 +32,27 @@ export interface PostItem {
   createdAt: string;
   updatedAt: string;
   user: ResponseUser;
+}
+
+export interface CreateCommentDto {
+  postId: number;
+  text: string;
+}
+
+export interface CommentItem {
+  createdTime: any;
+  updatedTime: string;
+  id: number;
+  text: string;
+  post: PostItem;
+  user: ResponseUser;
+}
+
+export interface SearchPostDto {
+  title?: string;
+  body?: string;
+  views?: 'DESC' | 'ASC';
+  limit?: number;
+  take?: number;
+  tag?: string;
 }

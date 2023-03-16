@@ -16,4 +16,10 @@ export const UserApi = (instance: AxiosInstance) => ({
     const { data } = await instance.get('/users/me');
     return data;
   },
+
+  async getAll(): Promise<ResponseUser[]> {
+    const { data } = await instance.get('/users');
+
+    return data;
+  },
 });

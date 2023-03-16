@@ -1,16 +1,13 @@
 import React from 'react';
 import styles from './SideComments/SideComments.module.scss';
 import Link from 'next/link';
+import { PostItem, ResponseUser } from '../utils/api/types';
+import { Avatar } from '@material-ui/core';
 
 interface CommentItemProps {
-  user: {
-    id: number;
-    fullname: string;
-  };
+  user: ResponseUser;
   text: string;
-  post: {
-    title: string;
-  };
+  post: PostItem;
 }
 
 export const CommentItem: React.FC<CommentItemProps> = ({
@@ -21,13 +18,13 @@ export const CommentItem: React.FC<CommentItemProps> = ({
   return (
     <div className={styles.commentItem}>
       <div className={styles.userInfo}>
-        <img src="https://leonardo.osnova.io/598fc957-a3f6-598c-b6f9-a033c3941d12/-/scale_crop/64x64/-/format/webp/" />
+        <Avatar>{user.fullName[0]}</Avatar>
         <Link href={`/profile/${user.id}`}>
-          <b>{user.fullname}</b>
+          <b className="ml-10">{user.fullName}</b>
         </Link>
       </div>
       <p className={styles.text}>{text}</p>
-      <Link href={`/news/${user.id}`}>
+      <Link href={`/news/${post.id}`}>
         <span className={styles.postTitle}>{post.title}</span>
       </Link>
     </div>

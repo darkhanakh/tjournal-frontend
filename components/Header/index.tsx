@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Paper, Button, IconButton, Avatar } from '@material-ui/core';
+import {
+  Paper,
+  Button,
+  IconButton,
+  Avatar,
+  ListItem,
+  List,
+} from '@material-ui/core';
 import {
   SearchOutlined as SearchIcon,
   SmsOutlined as MessageIcon,
@@ -16,10 +23,15 @@ import styles from './Header.module.scss';
 import AuthDialog from '../AuthDialog';
 import { useAppSelector } from '../../redux/hooks';
 import { selectUserData } from '../../redux/reducers/user.slice';
+import { PostItem } from '../../utils/api/types';
+import { Api } from '../../utils/api';
 
 const Header: React.FC = () => {
   const userData = useAppSelector(selectUserData);
   const [authVisible, setAuthVisible] = useState(false);
+  const [posts, setPosts] = useState<PostItem[]>([]);
+  const [searchValue, setSearchValue] = useState('');
+  const [isInputClicked, setIsInputClicked] = useState(false);
 
   const handleAuthOpen = () => {
     setAuthVisible(true);
@@ -34,6 +46,16 @@ const Header: React.FC = () => {
       setAuthVisible(false);
     }
   }, [authVisible, userData]);
+
+  const handleChangeInput = async (e) => {
+    setSearchValue(e.target.value);
+    try {
+      const { items } = await Api().post.search({ title: e.target.value });
+      setPosts(items);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>
@@ -53,7 +75,25 @@ const Header: React.FC = () => {
 
         <div className={styles.searchBlock}>
           <SearchIcon />
-          <input placeholder="Поиск" />
+          <input
+            value={searchValue}
+            onClick={() => setIsInputClicked(!isInputClicked)}
+            onChange={handleChangeInput}
+            placeholder="Поиск"
+          />
+          {posts.length > 0 && isInputClicked && (
+            <Paper className={styles.searchBlockPopup}>
+              <List>
+                {posts.map((post) => (
+                  <Link key={post.id} href={`/news/${post.id}`} legacyBehavior>
+                    <a href="">
+                      <ListItem button>{post.title}</ListItem>
+                    </a>
+                  </Link>
+                ))}
+              </List>
+            </Paper>
+          )}
         </div>
 
         <Link href="/write">

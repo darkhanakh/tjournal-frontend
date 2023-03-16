@@ -1,9 +1,20 @@
 import { AxiosInstance } from 'axios';
-import { CreatePostDto, PostItem } from './types';
+import { CreatePostDto, PostItem, SearchPostDto } from './types';
 
 export const PostApi = (instance: AxiosInstance) => ({
   async getAll() {
     const { data } = await instance.get<PostItem[]>('/posts');
+
+    return data;
+  },
+
+  async search(query: SearchPostDto) {
+    const { data } = await instance.get<{ items: PostItem[]; total: number }>(
+      '/posts/search',
+      {
+        params: query,
+      }
+    );
 
     return data;
   },
